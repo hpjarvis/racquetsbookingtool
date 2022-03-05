@@ -225,6 +225,9 @@ if __name__ == "__main__":
     options.BinaryLocation = "/usr/bin/chromium-browser"
     # we use custom chromedriver for raspberry
     driver_path = "/usr/bin/chromedriver"
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(options=options, service=Service(driver_path))
 
     # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
