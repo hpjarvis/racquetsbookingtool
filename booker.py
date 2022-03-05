@@ -217,7 +217,17 @@ def job():
 
 
 if __name__ == "__main__":
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+
+    options = Options()
+    # browser is Chromium instead of Chrome
+    options.BinaryLocation = "/usr/bin/chromium-browser"
+    # we use custom chromedriver for raspberry
+    driver_path = "/usr/bin/chromedriver"
+    driver = webdriver.Chrome(options=options, service=Service(driver_path))
+
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     print("RUNNING BOOKING TOOL")
     print('Starting - Waiting for wednesday @ 00:00')
     schedule.every().wednesday.at("00:00").do(job)
