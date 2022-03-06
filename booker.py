@@ -233,7 +233,7 @@ if __name__ == "__main__":
     # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     print("RUNNING BOOKING TOOL")
     print('Starting - Waiting for wednesday @ 00:00')
-    schedule.every().wednesday.at("00:00").do(job)
+    schedule.every().sunday.at("00:00").do(job)
 
     while True:
         schedule.run_pending()
