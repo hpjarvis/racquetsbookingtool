@@ -116,51 +116,51 @@ def job():
     
 
     # # click the time slot
-    # try:
-    #     driver.find_element(by=By.XPATH, value='/html/body/form/div[3]/div/div/div/section/div/div/div[1]/div[2]/div[1]/table/tbody/tr[17]/td[2]/span/input').click()
-    # except:
-    #     print('Badminton Not Available')
-    # else:
-    #     time.sleep(5)
+    try:
+        driver.find_element(by=By.XPATH, value='/html/body/form/div[3]/div/div/div/section/div/div/div[1]/div[2]/div[1]/table/tbody/tr[17]/td[2]/span/input').click()
+    except:
+        print('Badminton Not Available')
+    else:
+        time.sleep(5)
 
-    #     # dict that holds avaliable courts in each zone.
-    #     courts = {'A': [], 'B': [], 'C': [], 'D': []}
+        # dict that holds avaliable courts in each zone.
+        courts = {'A': [], 'B': [], 'C': [], 'D': []}
 
-    #     # time 17 == 21:00
-    #     target_time = "17"
+        # time 17 == 21:00
+        target_time = "17"
 
-    #     for i in range(1, 17):
-    #         try:
-    #             x = (driver.find_element(by=By.XPATH, value="/html/body/form/div[3]/div/div/div/div/div/div[3]/div[2]/div[1]/div/div/table/tbody/tr[{}]/td[{}]/input".format(target_time ,i)).get_attribute('data-qa-id'))
-    #         except:
-    #             x = (driver.find_element(by=By.XPATH, value="/html/body/form/div[3]/div/div/div/div/div/div[3]/div[2]/div[1]/div/div/table/tbody/tr[{}]/td[{}]".format(target_time, i)).get_attribute('data-qa-id'))
-    #         finally:
-    #             if "Not Available" not in x:
-    #                 court = re.search("Court=(Zone ([a-zA-Z]) Court (\d))", x)
-    #                 courts[court.group(2)].append(court.group(3))
+        for i in range(1, 17):
+            try:
+                x = (driver.find_element(by=By.XPATH, value="/html/body/form/div[3]/div/div/div/div/div/div[3]/div[2]/div[1]/div/div/table/tbody/tr[{}]/td[{}]/input".format(target_time ,i)).get_attribute('data-qa-id'))
+            except:
+                x = (driver.find_element(by=By.XPATH, value="/html/body/form/div[3]/div/div/div/div/div/div[3]/div[2]/div[1]/div/div/table/tbody/tr[{}]/td[{}]".format(target_time, i)).get_attribute('data-qa-id'))
+            finally:
+                if "Not Available" not in x:
+                    court = re.search("Court=(Zone ([a-zA-Z]) Court (\d))", x)
+                    courts[court.group(2)].append(court.group(3))
                 
 
-    #     badminton_zone_priority = ['D', 'A', 'C', 'B']
+        badminton_zone_priority = ['D', 'A', 'C', 'B']
 
-    #     for zone in badminton_zone_priority:
-    #         if len(courts[zone]) != 0:
-    #             if set(['1','2']).issubset(courts[zone]): 
-    #                 print('Booking Zone: ' + zone + ' Courts: 1 & 2')
-    #                 book_badminton(zone, '1', '2', target_time)
-    #                 break
+        for zone in badminton_zone_priority:
+            if len(courts[zone]) != 0:
+                if set(['1','2']).issubset(courts[zone]): 
+                    print('Booking Zone: ' + zone + ' Courts: 1 & 2')
+                    book_badminton(zone, '1', '2', target_time)
+                    break
 
-    #             elif set(['3','4']).issubset(courts[zone]):
-    #                 print('Booking Zone: ' + zone + ' Courts: 3 & 4')
-    #                 book_badminton(zone, '3', '4', target_time)
-    #                 break
+                elif set(['3','4']).issubset(courts[zone]):
+                    print('Booking Zone: ' + zone + ' Courts: 3 & 4')
+                    book_badminton(zone, '3', '4', target_time)
+                    break
 
-    #             elif set(['2','3']).issubset(courts[zone]):
-    #                 print('Booking Zone: ' + zone + ' Courts: 2 & 3')
-    #                 book_badminton(zone, '2', '3', target_time)
-    #                 break
+                elif set(['2','3']).issubset(courts[zone]):
+                    print('Booking Zone: ' + zone + ' Courts: 2 & 3')
+                    book_badminton(zone, '2', '3', target_time)
+                    break
 
-    #     else:
-    #         print('Badminton Not Available')
+        else:
+            print('Badminton Not Available')
 
     time.sleep(3)
 
@@ -239,7 +239,7 @@ if __name__ == "__main__":
     # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     print("RUNNING BOOKING TOOL")
     print('Starting - Waiting for wednesday @ 00:00')
-    schedule.every().sunday.at("00:00").do(job)
+    schedule.every().wednesday.at("00:00").do(job)
 
     while True:
         schedule.run_pending()
